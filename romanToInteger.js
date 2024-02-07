@@ -48,19 +48,20 @@ var romanToInt = function (s) {
     M: 1000,
   };
 
-  // First Index contain the roman, second index the integer
-  romanEntries = Object.entries(romanNumerals);
+  let integer = 0;
 
-  for (const letter of s) {
-    for (let i = romanEntries.length - 1; i >= 0; i--) {
-      // console.log(`${romanEntries[i][0]} is equal to: ${romanEntries[i][1]}`);
-      if (letter != romanEntries[i][0]) {
-        continue;
-      } else {
-        console.log(`${romanEntries[i][0]} was found!`);
-      }
+  for (let i = 0; i < s.length; i++) {
+    // console.log(romanNumerals[s[i]]);
+    if (romanNumerals[s[i]] < romanNumerals[s[i + 1]]) {
+      integer -= romanNumerals[s[i]];
+    } else {
+      integer += romanNumerals[s[i]];
     }
   }
+
+  console.log(`Input: ${s}\nOutput: ${integer}`);
 };
 
-romanToInt(`MVI`);
+romanToInt(`III`);
+romanToInt(`LVIII`);
+romanToInt(`MCMXCIV`);
